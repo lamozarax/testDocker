@@ -28,6 +28,10 @@ RUN    /etc/init.d/postgresql start &&\
 	psql --command "ALTER ROLE lmsuser SET timezone TO 'UTC';" &&\
 	psql --command "GRANT ALL PRIVILEGES ON DATABASE lms TO lmsuser;"
 
+
+RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
+EXPOSE 5432
+
 USER root
 ENV DJANGO_SETTINGS_MODULE=config.settings_staging
 RUN sh ~/sites/$SITENAME/misc/cleanup.sh
