@@ -38,6 +38,8 @@ ENV LC_ALL="en_US.UTF-8"
 # RUN sh ~/sites/$SITENAME/misc/cleanup.sh
 # DB related end
 
+USER postgres
+
 EXPOSE 5432
 CMD ["/usr/lib/postgresql/9.5/bin/postgres"]
 
