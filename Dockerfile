@@ -8,8 +8,14 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
 
 RUN mkdir -p /root/.ssh/
-COPY ./deploy/lms_deploy.key /root/.ssh/lms_deploy.key
 COPY ./deploy/config /root/.ssh/config
+COPY ./deploy/known_hosts/ /root/.ssh/known_hosts
+COPY ./deploy/lms_deploy.key /root/.ssh/lms_deploy.key
+RUN chmod 400 /root/.ssh/lms_deploy.key
+
+RUN export SITENAME=xg-tech-xg-test.daoapp.io
+RUN mkdir -p ~/sites/$SITENAME/
+RUN git clone git@git.oschina.net-lms:xiaogu-tech/laioffer-lms.git ~/sites/$SITENAME/
 
 
 COPY ./www /var/www/html
