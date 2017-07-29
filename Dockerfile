@@ -9,6 +9,7 @@ RUN ln -s /usr/bin/pip3 /usr/bin/pip
 
 RUN mkdir -p /root/.ssh/
 COPY ./deploy/lms_deploy.key /root/.ssh/lms_deploy.key
+COPY ./deploy/config /root/.ssh/config
 
 
 COPY ./www /var/www/html
