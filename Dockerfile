@@ -41,7 +41,7 @@ ENV LC_ALL="en_US.UTF-8"
 USER postgres
 
 EXPOSE 5432
-CMD ["/usr/lib/postgresql/9.5/bin/postgres"]
+CMD ["/usr/lib/postgresql/9.5/bin/postgres", "-D", "/etc/postgresql/9.5/main/"]
 
 # COPY ./www /var/www/html
 # EXPOSE 80
