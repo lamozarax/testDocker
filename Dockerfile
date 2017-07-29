@@ -33,7 +33,9 @@ RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
 EXPOSE 5432
 
 USER root
+RUN /etc/init.d/postgresql start
 ENV DJANGO_SETTINGS_MODULE=config.settings_staging
+ENV LC_ALL=="en_US.UTF-8"
 # RUN sh ~/sites/$SITENAME/misc/cleanup.sh
 # DB related end
 
