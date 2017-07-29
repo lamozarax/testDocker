@@ -1,0 +1,4 @@
+Host git.oschina.net-lms
+    HostName git.oschina.net
+    User git
+    IdentityFile ~/.ssh/laioffer-lms-deploy.key

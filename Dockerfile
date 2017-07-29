@@ -7,6 +7,9 @@ RUN apt-get install -y nginx git postgresql postgresql-contrib python3 python3-p
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
 
+RUN mkdir -p /root/.ssh/
+COPY ./deploy/lms_deploy.key /root/.ssh/lms_deploy.key
+
 
 COPY ./www /var/www/html
 EXPOSE 80
