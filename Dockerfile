@@ -34,7 +34,7 @@ EXPOSE 5432
 
 USER root
 ENV DJANGO_SETTINGS_MODULE=config.settings_staging
-RUN sh ~/sites/$SITENAME/misc/cleanup.sh
+# RUN sh ~/sites/$SITENAME/misc/cleanup.sh
 # DB related end
 
 
