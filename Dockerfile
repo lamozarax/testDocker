@@ -2,8 +2,11 @@ FROM ubuntu:16.04
 MAINTAINER lamozarax dev@xiaogu-tech.com
 
 RUN apt-get update
-RUN apt-get install -y nginx git postgresql postgresql-contrib python3 python3-pip
-RUN pip3 install --user virtualenvwrapper
+RUN apt-get install -y nginx git postgresql postgresql-contrib python3 python3-pip ssh
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN ln -s /usr/bin/pip3 /usr/bin/pip
+
 
 COPY ./www /var/www/html
 EXPOSE 80
