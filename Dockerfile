@@ -33,7 +33,7 @@ RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
 
 USER root
 ENV DJANGO_SETTINGS_MODULE=config.settings_staging
-locale-gen en_US en_US.UTF-8
+RUN locale-gen en_US en_US.UTF-8
 ENV LC_ALL="en_US.UTF-8"
 # RUN sh ~/sites/$SITENAME/misc/cleanup.sh
 # DB related end
