@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER lamozarax dev@xiaogu-tech.com
 RUN apt-get update
 RUN apt-get install -y nginx
