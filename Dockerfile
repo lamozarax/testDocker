@@ -42,7 +42,7 @@ ENV LC_ALL="en_US.UTF-8"
 
 
 WORKDIR ~/sites/$SITENAME/
-RUN echo pwd
+RUN pwd
 RUN git pull origin master
 
 WORKDIR ~/sites/$SITENAME/source
