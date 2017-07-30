@@ -35,8 +35,23 @@ USER root
 ENV DJANGO_SETTINGS_MODULE=config.settings_staging
 RUN locale-gen en_US en_US.UTF-8
 ENV LC_ALL="en_US.UTF-8"
-# RUN sh ~/sites/$SITENAME/misc/cleanup.sh
+RUN sh ~/sites/$SITENAME/misc/cleanup.sh
 # DB related end
+
+
+WORKDIR ~/sites/$SITENAME/
+RUN git pull origin master
+
+WORKDIR ~/sites/$SITENAME/source
+gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application
+
+COPY ./deploy/nginx.conf /etc/nginx/sites-available/lms.conf
+RUN mv /etc/nginx/sites-available/lms.conf /etc/nginx/sites-available/$SITENAME
+RUN sed -i "s/SITENAME/$SITENAME/g" /etc/nginx/sites-available/$SITENAME
+RUN ln -s /etc/nginx/sites-available/$SITENAME /etc/nginx/sites-enabled/$SITENAME
+RUN rm /etc/nginx/sites-enabled/default
+RUN systemctl reload nginx
+RUN python manage.py collectstatic --noinput
 
 # USER postgres
 # EXPOSE 5432
