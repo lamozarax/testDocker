@@ -1,12 +1,15 @@
 #!/bin/bash
 
-echo 'init db'
+cd /sites/$SITENAME/
+git pull origin master
+
 /etc/init.d/postgresql start
 sh /sites/$SITENAME/misc/cleanup.sh
 
-echo 'start nginx'
 /etc/init.d/nginx start
 
-echo 'start gunicorn'
+
 cd /sites/$SITENAME/source/
-gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application --access-logfile /tmp/gunicorn.access.log --error-logfile /tmp/gunicorn.error.log
+touch /tmp/gunicorn.access.log
+touch /tmp/gunicorn.error.log
+gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application --access-logfile /tmp/gunicorn.access.log --error-logfile /tmp/gunicorn.error.log -D
