@@ -9,4 +9,4 @@ echo 'start nginx'
 
 echo 'start gunicorn'
 cd /sites/$SITENAME/source/
-gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application --access-logfile /tmp/gunicorn.log
+gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application --access-logfile /tmp/gunicorn.access.log --error-logfile /tmp/gunicorn.error.log
