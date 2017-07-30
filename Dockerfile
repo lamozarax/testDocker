@@ -63,6 +63,6 @@ RUN python manage.py collectstatic --noinput
 COPY ./www /var/www/html
 COPY ./deploy/start.sh /sites/start.sh
 EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 # CMD sh /sites/start.sh
-CMD echo 'finished'
+# CMD echo 'finished'
