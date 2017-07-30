@@ -3,10 +3,10 @@
 cd /sites/$SITENAME/
 git pull origin master
 
-/etc/init.d/postgresql start
+/etc/init.d/postgresql start -D
 sh /sites/$SITENAME/misc/cleanup.sh
 
-/etc/init.d/nginx start
+/etc/init.d/nginx start -D
 
 
 cd /sites/$SITENAME/source/
