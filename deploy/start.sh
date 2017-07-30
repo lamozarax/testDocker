@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo 'start unicorn'
+echo 'start gunicorn'
 cd /sites/$SITENAME/source/
-gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application
+gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application --access-logfile /tmp/gunicorn.log
 
 echo 'init db'
 /etc/init.d/postgresql start
