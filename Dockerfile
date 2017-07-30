@@ -19,6 +19,9 @@ ARG SITENAME=xg-tech-lms.daoapp.io
 RUN mkdir -p ~/sites/$SITENAME/
 RUN git clone git@git.oschina.net-lms:xiaogu-tech/laioffer-lms.git ~/sites/$SITENAME/
 RUN pip install -r ~/sites/$SITENAME/deploy_tools/requirements/staging.txt
+ENV DJANGO_SETTINGS_MODULE=config.settings_staging
+RUN locale-gen en_US en_US.UTF-8
+ENV LC_ALL="en_US.UTF-8"
 
 # DB related start
 USER postgres
@@ -30,24 +33,20 @@ RUN    /etc/init.d/postgresql start &&\
 	psql --command "ALTER ROLE lmsuser SET timezone TO 'UTC';" &&\
 	psql --command "GRANT ALL PRIVILEGES ON DATABASE lms TO lmsuser;"
 
-
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
-
 USER root
-ENV DJANGO_SETTINGS_MODULE=config.settings_staging
-RUN locale-gen en_US en_US.UTF-8
-ENV LC_ALL="en_US.UTF-8"
 # RUN sh ~/sites/$SITENAME/misc/cleanup.sh
 # DB related end
 
 
-WORKDIR ~/sites/$SITENAME/
+WORKDIR /root/sites/$SITENAME/
 RUN pwd
 RUN git pull origin master
 
-WORKDIR ~/sites/$SITENAME/source
+WORKDIR source
 # gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application
 
+# nginx related
 COPY ./deploy/nginx.conf /etc/nginx/sites-available/lms.conf
 RUN mv /etc/nginx/sites-available/lms.conf /etc/nginx/sites-available/$SITENAME
 RUN sed -i "s/SITENAME/$SITENAME/g" /etc/nginx/sites-available/$SITENAME
@@ -55,6 +54,7 @@ RUN ln -s /etc/nginx/sites-available/$SITENAME /etc/nginx/sites-enabled/$SITENAM
 RUN rm /etc/nginx/sites-enabled/default
 RUN systemctl reload nginx
 RUN python manage.py collectstatic --noinput
+# nginx related end
 
 # USER postgres
 # EXPOSE 5432
