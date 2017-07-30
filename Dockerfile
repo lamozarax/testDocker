@@ -16,9 +16,9 @@ RUN chmod 400 /root/.ssh/lms_deploy.key
 ENV SITENAME=xg-tech-lms.daoapp.io
 ARG SITENAME=xg-tech-lms.daoapp.io
 
-RUN mkdir -p ~/sites/$SITENAME/
-RUN git clone git@git.oschina.net-lms:xiaogu-tech/laioffer-lms.git ~/sites/$SITENAME/
-RUN pip install -r ~/sites/$SITENAME/deploy_tools/requirements/staging.txt
+RUN mkdir -p /sites/$SITENAME/
+RUN git clone git@git.oschina.net-lms:xiaogu-tech/laioffer-lms.git /sites/$SITENAME/
+RUN pip install -r /sites/$SITENAME/deploy_tools/requirements/staging.txt
 ENV DJANGO_SETTINGS_MODULE=config.settings_staging
 RUN locale-gen en_US en_US.UTF-8
 ENV LC_ALL="en_US.UTF-8"
@@ -35,11 +35,11 @@ RUN    /etc/init.d/postgresql start &&\
 
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
 USER root
-# RUN sh ~/sites/$SITENAME/misc/cleanup.sh
+# RUN sh /sites/$SITENAME/misc/cleanup.sh
 # DB related end
 
 
-WORKDIR /root/sites/$SITENAME/
+WORKDIR /sites/$SITENAME/
 RUN pwd
 RUN git pull origin master
 
