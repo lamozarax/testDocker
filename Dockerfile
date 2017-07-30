@@ -60,9 +60,8 @@ RUN python manage.py collectstatic --noinput
 # EXPOSE 5432
 # CMD ["/usr/lib/postgresql/9.5/bin/postgres", "-D", "/etc/postgresql/9.5/main/"]
 
-COPY ./www /var/www/html
 COPY ./deploy/start.sh /sites/start.sh
 EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 # CMD sh /sites/start.sh
 # CMD echo 'finished'
