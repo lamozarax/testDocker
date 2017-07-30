@@ -14,6 +14,8 @@ COPY ./deploy/lms_deploy.key /root/.ssh/lms_deploy.key
 RUN chmod 400 /root/.ssh/lms_deploy.key
 
 ENV SITENAME=xg-tech-lms.daoapp.io
+ARG SITENAME=xg-tech-lms.daoapp.io
+
 RUN mkdir -p ~/sites/$SITENAME/
 RUN git clone git@git.oschina.net-lms:xiaogu-tech/laioffer-lms.git ~/sites/$SITENAME/
 RUN pip install -r ~/sites/$SITENAME/deploy_tools/requirements/staging.txt
