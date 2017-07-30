@@ -38,11 +38,10 @@ ENV LC_ALL="en_US.UTF-8"
 # RUN sh ~/sites/$SITENAME/misc/cleanup.sh
 # DB related end
 
-USER postgres
+# USER postgres
+# EXPOSE 5432
+# CMD ["/usr/lib/postgresql/9.5/bin/postgres", "-D", "/etc/postgresql/9.5/main/"]
 
-EXPOSE 5432
-CMD ["/usr/lib/postgresql/9.5/bin/postgres", "-D", "/etc/postgresql/9.5/main/"]
-
-# COPY ./www /var/www/html
-# EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+COPY ./www /var/www/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
