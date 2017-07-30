@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 MAINTAINER lamozarax dev@xiaogu-tech.com
 
 RUN apt-get update
-RUN apt-get install -y nginx git postgresql postgresql-contrib python3 python3-pip ssh vim supervisor
+RUN apt-get install -y nginx git postgresql postgresql-contrib python3 python3-pip ssh vim
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN ln -s /usr/bin/pip3 /usr/bin/pip
