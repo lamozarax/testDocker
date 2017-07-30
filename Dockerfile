@@ -43,7 +43,7 @@ WORKDIR ~/sites/$SITENAME/
 RUN git pull origin master
 
 WORKDIR ~/sites/$SITENAME/source
-gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application
+# gunicorn --bind unix:/tmp/$SITENAME.socket config.wsgi:application
 
 COPY ./deploy/nginx.conf /etc/nginx/sites-available/lms.conf
 RUN mv /etc/nginx/sites-available/lms.conf /etc/nginx/sites-available/$SITENAME
