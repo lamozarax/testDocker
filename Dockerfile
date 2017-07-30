@@ -52,7 +52,6 @@ RUN mv /etc/nginx/sites-available/lms.conf /etc/nginx/sites-available/$SITENAME
 RUN sed -i "s/SITENAME/$SITENAME/g" /etc/nginx/sites-available/$SITENAME
 RUN ln -s /etc/nginx/sites-available/$SITENAME /etc/nginx/sites-enabled/$SITENAME
 RUN rm /etc/nginx/sites-enabled/default
-# RUN systemctl reload nginx
 RUN python manage.py collectstatic --noinput
 # nginx related end
 
@@ -63,5 +62,4 @@ RUN python manage.py collectstatic --noinput
 COPY ./deploy/start.sh /sites/start.sh
 EXPOSE 80
 # CMD ["nginx", "-g", "daemon off;"]
-CMD sh /sites/start.sh
-# CMD echo 'finished'
+CMD ["echo", "finished"]
